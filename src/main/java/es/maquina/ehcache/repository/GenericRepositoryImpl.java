@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.transaction.annotation.Transactional;
 
 public abstract class GenericRepositoryImpl<K extends Number, T extends Identificable<K>>
@@ -20,11 +21,13 @@ public abstract class GenericRepositoryImpl<K extends Number, T extends Identifi
 		return nuevo;
 	}
 
+	@Cacheable("customCache")
 	@Override
 	public T read(K id) {
 		return entityManager.find(getClassDeT(), id);
 	}
 
+	@Cacheable("customCache")
 	@Override
 	public List<T> list() {
 		return entityManager.createQuery("select * from " + getNombreTabla(), getClassDeT()).getResultList();

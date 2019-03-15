@@ -5,10 +5,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import es.maquina.ehcache.anotaciones.TiempoEjecucion;
 import es.maquina.ehcache.dominio.Espada;
 import es.maquina.ehcache.repository.EspadaRepository;
 
-@Service
+@Service("EspadaService")
 public class EspadaServiceImpl implements EspadaService {
 
 	private EspadaRepository espadaRepository;
@@ -18,15 +19,8 @@ public class EspadaServiceImpl implements EspadaService {
 		return espadaRepository.update(modificada);
 	}
 
-	@Override
-	public Long aniadirEspada(String nombre) {
-		Espada espada = new Espada();
-		espada.setNombre(nombre);
-
-		return aniadirEspada(espada).getId();
-	}
-
-	private Espada aniadirEspada(Espada nueva) {
+	@TiempoEjecucion
+	public Espada aniadirEspada(Espada nueva) {
 		return espadaRepository.add(nueva);
 	}
 
@@ -37,6 +31,7 @@ public class EspadaServiceImpl implements EspadaService {
 	}
 
 	@Override
+	@TiempoEjecucion
 	public Espada obtenerEspada(Long id) {
 		return espadaRepository.read(id);
 	}

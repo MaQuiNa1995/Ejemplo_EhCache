@@ -5,7 +5,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import es.maquina.ehcache.dominio.Espada;
 
-@Repository
+@Repository("EspadaRepository")
 @Transactional
 public class EspadaRepositoryImpl extends GenericRepositoryImpl<Long, Espada> implements EspadaRepository {
 

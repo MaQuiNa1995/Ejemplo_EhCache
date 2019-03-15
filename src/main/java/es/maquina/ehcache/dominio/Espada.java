@@ -99,4 +99,10 @@ public class Espada implements Identificable<Long> {
 		this.retroceso = retroceso;
 	}
 
+	@Override
+	public String toString() {
+		return "Espada [id=" + id + ", nombre=" + nombre + ", danno=" + danno + ", propiedad=" + propiedad
+				+ ", crafteable=" + crafteable + ", velocidad=" + velocidad + ", retroceso=" + retroceso + "]";
+	}
+
 }

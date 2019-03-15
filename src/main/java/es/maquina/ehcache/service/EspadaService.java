@@ -8,7 +8,7 @@ public interface EspadaService {
 
 	public Espada actualizarEspada(Espada espada);
 
-	public Long aniadirEspada(String nombreEspada);
+	public Espada aniadirEspada(Espada espada);
 
 	public void borrarEspada(Long id);
 
