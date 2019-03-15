@@ -9,6 +9,7 @@
 			<column autoIncrement="true" name="ID" type="INT(10)">
 				<constraints primaryKey="true" />
 			</column>
+			<column name="NOMBRE" type="VARCHAR(30)" />
 			<column name="DANNO" type="INT(3)" />
 			<column name="PROPIEDAD" type="VARCHAR(20)" />
 			<column name="CRAFTEABLE" type="BOOLEAN" />
