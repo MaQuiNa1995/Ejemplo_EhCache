@@ -1,54 +1,35 @@
 package es.maquina.ehcache.repository;
 
-import java.util.List;
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.transaction.annotation.Transactional;
 
-public abstract class GenericRepositoryImpl<K extends Number, T extends Identificable<K>>
-		implements GenericRepository<K, T> {
+/**
+ * The Class GenericDaoImpl.
+ * 
+ * @param <M> the generic type
+ */
+public abstract class GenericRepositoryImpl<M> implements GenericRepository<M> {
 
-	@PersistenceContext
+	/**
+	 * El entity manager
+	 */
+	@PersistenceContext(name = "MaQuiNaPersistenceUnit")
 	protected EntityManager entityManager;
 
 	@Transactional
 	@Override
-	public T add(T nuevo) {
-		entityManager.persist(nuevo);
-		return nuevo;
-	}
-
-	@Cacheable("customCache")
-	@Override
-	public T read(K id) {
-		return entityManager.find(getClassDeT(), id);
-	}
-
-	@Cacheable("customCache")
-	@Override
-	public List<T> list() {
-		return entityManager.createQuery("select * from " + getNombreTabla(), getClassDeT()).getResultList();
+	public M persist(M objetoPersistir) {
+		entityManager.persist(objetoPersistir);
+		return objetoPersistir;
 	}
 
 	@Transactional
 	@Override
-	public void delete(K id) {
-		T aBorrar = entityManager.find(getClassDeT(), id);
-		delete(aBorrar);
+	public M merge(M objetoUpdatear) {
+		entityManager.merge(objetoUpdatear);
+		return objetoUpdatear;
 	}
 
-	@Transactional
-	@Override
-	public void delete(T aBorrar) {
-		entityManager.remove(aBorrar);
-	}
-
-	@Transactional
-	@Override
-	public T update(T modificado) {
-		return entityManager.merge(modificado);
-	}
 }

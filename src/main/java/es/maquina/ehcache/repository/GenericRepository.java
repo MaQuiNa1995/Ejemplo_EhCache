@@ -1,22 +1,33 @@
 package es.maquina.ehcache.repository;
 
-import java.util.List;
+/**
+ * Implementacion generica de capa Repository
+ * 
+ * @param <M> hace referencia al objeto generico que se va a usar en la clase
+ */
+public interface GenericRepository<M> {
 
-public interface GenericRepository<K extends Number, T extends Identificable<K>> {
+	/**
+	 * Hace el persist de la entidad pasada como parametro
+	 * 
+	 * @param objetoPersistir el objeto a persistir
+	 * @return la entidad persistida en base de datos
+	 */
+	M persist(M objetoPersistir);
 
-	T add(T nuevo);
+	/**
+	 * Hace el merge de la entidad pasada como parametro
+	 * 
+	 * @param objetoUpdatear el objeto a modificar
+	 * @return the M
+	 */
+	M merge(M objetoUpdatear);
 
-	T read(K id);
+	/**
+	 * Se obtiene la clase del Repository que se ha usado en el generico
+	 * 
+	 * @return clase que usa el repository para la persistencia
+	 */
+	public abstract Class<M> getClassDeM();
 
-	List<T> list();
-
-	T update(T modificado);
-
-	void delete(K id);
-
-	void delete(T aBorrar);
-
-	public abstract Class<T> getClassDeT();
-
-	public abstract String getNombreTabla();
 }

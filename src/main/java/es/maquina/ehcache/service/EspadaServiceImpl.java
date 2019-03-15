@@ -1,7 +1,5 @@
 package es.maquina.ehcache.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,36 +7,31 @@ import es.maquina.ehcache.anotaciones.TiempoEjecucion;
 import es.maquina.ehcache.dominio.Espada;
 import es.maquina.ehcache.repository.EspadaRepository;
 
-@Service("EspadaService")
+@Service("espadaService")
 public class EspadaServiceImpl implements EspadaService {
 
 	private EspadaRepository espadaRepository;
 
 	@Override
 	public Espada actualizarEspada(Espada modificada) {
-		return espadaRepository.update(modificada);
+		return espadaRepository.merge(modificada);
 	}
 
 	@TiempoEjecucion
 	public Espada aniadirEspada(Espada nueva) {
-		return espadaRepository.add(nueva);
+		return espadaRepository.persist(nueva);
 	}
 
 	@Override
 	public void borrarEspada(Long id) {
 		Espada aBorrar = obtenerEspada(id);
-		espadaRepository.delete(aBorrar);
+		espadaRepository.remove(aBorrar);
 	}
 
 	@Override
 	@TiempoEjecucion
 	public Espada obtenerEspada(Long id) {
-		return espadaRepository.read(id);
-	}
-
-	@Override
-	public List<Espada> obtenerEspadas() {
-		return espadaRepository.list();
+		return espadaRepository.find(id);
 	}
 
 	@Autowired

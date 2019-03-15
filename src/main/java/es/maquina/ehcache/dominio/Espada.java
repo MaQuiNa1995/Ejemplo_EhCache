@@ -1,5 +1,7 @@
 package es.maquina.ehcache.dominio;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,11 +10,10 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import es.maquina.ehcache.repository.EspadaRepositoryImpl;
-import es.maquina.ehcache.repository.Identificable;
 
 @Entity
 @Table(name = EspadaRepositoryImpl.NOMBRE_TABLA)
-public class Espada implements Identificable<Long> {
+public class Espada implements Serializable {
 
 	/**
 	 * 
@@ -41,12 +42,10 @@ public class Espada implements Identificable<Long> {
 	@Column(name = "RETROCESO")
 	private int retroceso;
 
-	@Override
 	public Long getId() {
 		return this.id;
 	}
 
-	@Override
 	public void setId(Long id) {
 		this.id = id;
 	}
