@@ -22,28 +22,26 @@ public class Main {
 		try (AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(ConfiguracionSpring.class,
 				LiquibaseConfig.class, EhCacheConfig.class)) {
 
-			espadaService = (EspadaServiceImpl) ctx.getBean("EspadaService");
+			espadaService = (EspadaServiceImpl) ctx.getBean("espadaService");
+
+			Espada espada = new Espada();
+			espada.setCrafteable(Boolean.TRUE);
+			espada.setDanno(325);
+			espada.setNombre("Espada Champiñon");
+			espada.setPropiedad("+4% Crítico");
+			espada.setRetroceso(50);
+			espada.setVelocidad(4);
+
+			espadaService.aniadirEspada(espada);
+			LOGGER.info("Espada Añadida: " + espada.toString());
+
+			espadaService.obtenerEspada(espada.getId());
+
+			espadaService.obtenerEspada(espada.getId());
+
 		}
 
-		Espada espada = new Espada();
-		espada.setCrafteable(Boolean.TRUE);
-		espada.setDanno(325);
-		espada.setNombre("Espada Champiñon");
-		espada.setPropiedad("+4% Crítico");
-		espada.setRetroceso(50);
-		espada.setVelocidad(4);
-
-		espadaService.aniadirEspada(espada);
-		LOGGER.info("Espada Añadida: " + espada.toString());
-
-		espadaService.obtenerEspada(espada.getId());
-
-		espadaService.obtenerEspada(espada.getId());
-
-		LOGGER.info("Se acabó el programa");
-
 		System.exit(0);
-
 	}
 
 }
