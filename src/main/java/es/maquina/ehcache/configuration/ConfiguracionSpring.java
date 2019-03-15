@@ -13,10 +13,8 @@ import org.springframework.orm.jpa.vendor.Database;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 
 public class ConfiguracionSpring {
-	private static final String PROPERTY_NAME_HIBERNATE_DIALECT = "hibernate.dialect";
-	private static final String PROPERTY_NAME_HIBERNATE_MAX_FETCH_DEPTH = "hibernate.max_fetch_depth";
-	private static final String PROPERTY_NAME_HIBERNATE_JDBC_FETCH_SIZE = "hibernate.jdbc.fetch_size";
-	private static final String ENTITYMANAGER_PACKAGES_TO_SCAN = "es.cic.curso.curso18.mascotastarcraft.dominio";
+
+	private static final String ENTITYMANAGER_PACKAGES_TO_SCAN = "es.maquina.ehcache.dominio";
 
 	@Bean
 	public DataSource dataSource() {
