@@ -1,12 +1,10 @@
 package es.maquina.ehcache.repository;
 
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import es.maquina.ehcache.dominio.Espada;
 
 @Repository("EspadaRepository")
-@Transactional
 public class EspadaRepositoryImpl extends GenericRepositoryImpl<Long, Espada> implements EspadaRepository {
 
 	public static final String NOMBRE_TABLA = "ESPADA";
