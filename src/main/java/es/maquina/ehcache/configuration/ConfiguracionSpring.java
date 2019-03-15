@@ -7,13 +7,21 @@ import javax.sql.DataSource;
 import org.apache.commons.dbcp.BasicDataSource;
 import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.Database;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+@EnableTransactionManagement
+@Configuration
+@ComponentScan("es.maquina.ehcache")
 public class ConfiguracionSpring {
-
+	private static final String PROPERTY_NAME_HIBERNATE_DIALECT = "hibernate.dialect";
+	private static final String PROPERTY_NAME_HIBERNATE_MAX_FETCH_DEPTH = "hibernate.max_fetch_depth";
+	private static final String PROPERTY_NAME_HIBERNATE_JDBC_FETCH_SIZE = "hibernate.jdbc.fetch_size";
 	private static final String ENTITYMANAGER_PACKAGES_TO_SCAN = "es.maquina.ehcache.dominio";
 
 	@Bean
@@ -55,7 +63,7 @@ public class ConfiguracionSpring {
 		HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
 		vendorAdapter.setShowSql(true);
 		vendorAdapter.setDatabase(Database.HSQL);
-		vendorAdapter.setGenerateDdl(Boolean.TRUE);
+		vendorAdapter.setGenerateDdl(Boolean.FALSE);
 
 		return vendorAdapter;
 	}
