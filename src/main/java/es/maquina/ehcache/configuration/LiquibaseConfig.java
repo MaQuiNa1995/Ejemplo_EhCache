@@ -20,7 +20,7 @@ public class LiquibaseConfig {
 	@Bean
 	public SpringLiquibase liquibase() {
 
-		String changelogFile = "classpath:/maquina/ehchache/changelog.xml";
+		String changelogFile = "classpath:changelog.xml";
 
 		SpringLiquibase liquibase = new SpringLiquibase();
 		liquibase.setChangeLog(changelogFile);
