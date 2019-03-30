@@ -3,7 +3,6 @@ package es.maquina.ehcache.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import es.maquina.ehcache.anotaciones.TiempoEjecucion;
 import es.maquina.ehcache.dominio.Espada;
 import es.maquina.ehcache.repository.EspadaRepository;
 
@@ -17,7 +16,6 @@ public class EspadaServiceImpl implements EspadaService {
 		return espadaRepository.merge(modificada);
 	}
 
-	@TiempoEjecucion
 	public Espada aniadirEspada(Espada nueva) {
 		return espadaRepository.persist(nueva);
 	}
@@ -29,7 +27,6 @@ public class EspadaServiceImpl implements EspadaService {
 	}
 
 	@Override
-	@TiempoEjecucion
 	public Espada obtenerEspada(Long id) {
 		return espadaRepository.find(id);
 	}
