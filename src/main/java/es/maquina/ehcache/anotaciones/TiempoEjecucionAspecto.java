@@ -1,19 +1,39 @@
 package es.maquina.ehcache.anotaciones;
 
-import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.After;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
+@Aspect
+@Component
 public class TiempoEjecucionAspecto {
 
-	@Around("@annotation(TiempoEjecucion)")
-	public Object tiempoEjecucion(ProceedingJoinPoint joinPoint) throws Throwable {
-		long start = System.currentTimeMillis();
+	/** Logger genérico de la clase. */
+	private static final Logger LOGGER = LoggerFactory.getLogger(TiempoEjecucionAspecto.class);
 
-		Object proceed = joinPoint.proceed();
+	private long inicioEjecucion;
 
-		long executionTime = System.currentTimeMillis() - start;
+	@Before("execution(* es.maquina.ehcache.repository.EspadaRepository.find(..))")
+	public void logBefore(JoinPoint joinPoint) {
 
-		System.out.println(joinPoint.getSignature() + " executed in " + executionTime + "ms");
-		return proceed;
+		inicioEjecucion = getHoraActual();
+
 	}
+
+	@After("execution(* es.maquina.ehcache.repository.EspadaRepository.find(..))")
+	public void logAfter(JoinPoint joinPoint) {
+
+		double tiempoEjecucion = (getHoraActual() - inicioEjecucion) / 1000D;
+		LOGGER.info("Metodo Ejecutado en: " + tiempoEjecucion + " segundos !!");
+
+	}
+
+	private long getHoraActual() {
+		return System.currentTimeMillis() % 1000;
+	}
+
 }
