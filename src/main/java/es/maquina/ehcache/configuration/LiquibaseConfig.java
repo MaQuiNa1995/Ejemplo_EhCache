@@ -30,7 +30,7 @@ public class LiquibaseConfig {
 		liquibase.setShouldRun(true);
 
 		Map<String, String> params = new HashMap<>();
-		params.put("verbose", "true");
+		params.put("verbose", "false");
 		liquibase.setChangeLogParameters(params);
 
 		return liquibase;
