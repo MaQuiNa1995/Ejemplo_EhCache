@@ -15,8 +15,8 @@ public class Main {
     /** Logger genérico de la clase. */
     private static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
 
-    public static void main(String[] args) {
-
+    public static void main(String... args) {
+	
 	try (AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(ConfiguracionSpring.class,
 		LiquibaseConfig.class, EhCacheConfig.class)) {
 
