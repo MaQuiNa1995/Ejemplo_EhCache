@@ -5,10 +5,11 @@
 	monitoring="autodetect"
 	dynamicConfig="true">
 	
-	<cache name="customCache"
+	<cache name="espadaCache"
 		maxEntriesLocalHeap="500"
 		maxEntriesLocalDisk="1000"
-		eternal="false" diskSpoolBufferSizeMB="20"
+		eternal="false"
+		diskSpoolBufferSizeMB="20"
 		timeToIdleSeconds="200"
 		timeToLiveSeconds="500"
 		memoryStoreEvictionPolicy="LFU"

@@ -1,5 +1,6 @@
 package es.maquina.ehcache.main;
 
+import org.apache.log4j.PropertyConfigurator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -8,40 +9,44 @@ import es.maquina.ehcache.configuration.ConfiguracionSpring;
 import es.maquina.ehcache.configuration.EhCacheConfig;
 import es.maquina.ehcache.configuration.LiquibaseConfig;
 import es.maquina.ehcache.dominio.Espada;
-import es.maquina.ehcache.service.EspadaServiceImpl;
+import es.maquina.ehcache.service.EspadaService;
 
 public class Main {
 
-	/** Logger genérico de la clase. */
-	private static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
+    /** Logger genérico de la clase. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
 
-	public static void main(String[] args) {
+    public static void main(String[] args) {
 
-		EspadaServiceImpl espadaService = null;
+	// Configuración de la ruta del properties
+	PropertyConfigurator.configure("log4j.properties");
 
-		try (AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(ConfiguracionSpring.class,
-				LiquibaseConfig.class, EhCacheConfig.class)) {
+	try (AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(ConfiguracionSpring.class,
+		LiquibaseConfig.class, EhCacheConfig.class)) {
 
-			espadaService = (EspadaServiceImpl) ctx.getBean("espadaService");
+	    EspadaService espadaService = (EspadaService) ctx.getBean("espadaService");
 
-			Espada espada = new Espada();
-			espada.setCrafteable(Boolean.TRUE);
-			espada.setDanno(325);
-			espada.setNombre("Espada Champiñon");
-			espada.setPropiedad("+4% Crítico");
-			espada.setRetroceso(50);
-			espada.setVelocidad(4);
+	    Espada espada = new Espada()
+		    .setCrafteable(Boolean.TRUE)
+		    .setDanno(325)
+		    .setNombre("Espada Champiñon")
+		    .setPropiedad("+4% Crítico")
+		    .setRetroceso(50)
+		    .setVelocidad(4);
 
-			espadaService.aniadirEspada(espada);
-			LOGGER.info("Espada Añadida: " + espada.toString());
+	    espadaService.aniadirEspada(espada);
+	    LOGGER.info("Espada Añadida: " + espada.toString());
 
-			espadaService.obtenerEspada(espada.getId());
+	    LOGGER.info("Se trazan líneas para identificar mas rápidamente la traza de log que queremos verificar");
+	    LOGGER.info("-------------------------------------------------------");
+	    espadaService.obtenerEspada(espada.getId());
+	    LOGGER.info("-------------------------------------------------------");
+	    espadaService.obtenerEspada(espada.getId());
+	    LOGGER.info("-------------------------------------------------------");
 
-			espadaService.obtenerEspada(espada.getId());
-
-		}
-
-		System.exit(0);
 	}
+
+	System.exit(0);
+    }
 
 }

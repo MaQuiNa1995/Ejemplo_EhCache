@@ -14,16 +14,16 @@ import org.springframework.core.io.ClassPathResource;
 @ComponentScan(basePackages = "es.maquina.ehcache")
 public class EhCacheConfig {
 
-	@Bean
-	public CacheManager cacheManager() {
-		return new EhCacheCacheManager(ehCacheCacheManager().getObject());
-	}
+    @Bean
+    public CacheManager cacheManager() {
+	return new EhCacheCacheManager(ehCacheCacheManager().getObject());
+    }
 
-	@Bean
-	public EhCacheManagerFactoryBean ehCacheCacheManager() {
-		EhCacheManagerFactoryBean ehCache = new EhCacheManagerFactoryBean();
-		ehCache.setConfigLocation(new ClassPathResource("ehcache.xml"));
-		ehCache.setShared(true);
-		return ehCache;
-	}
+    @Bean
+    public EhCacheManagerFactoryBean ehCacheCacheManager() {
+	EhCacheManagerFactoryBean ehCache = new EhCacheManagerFactoryBean();
+	ehCache.setConfigLocation(new ClassPathResource("EhcacheConfig.xml"));
+	ehCache.setShared(Boolean.FALSE);
+	return ehCache;
+    }
 }

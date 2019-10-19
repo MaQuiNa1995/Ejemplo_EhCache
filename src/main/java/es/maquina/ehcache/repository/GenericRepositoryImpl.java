@@ -12,24 +12,36 @@ import org.springframework.transaction.annotation.Transactional;
  */
 public abstract class GenericRepositoryImpl<M> implements GenericRepository<M> {
 
-	/**
-	 * El entity manager
-	 */
-	@PersistenceContext(name = "MaQuiNaPersistenceUnit")
-	protected EntityManager entityManager;
+    /**
+     * El entity manager
+     */
+    @PersistenceContext(name = "MaQuiNaPersistenceUnit")
+    protected EntityManager entityManager;
 
-	@Transactional
-	@Override
-	public M persist(M objetoPersistir) {
-		entityManager.persist(objetoPersistir);
-		return objetoPersistir;
-	}
+    @Override
+    @Transactional
+    public M persist(M objetoPersistir) {
+	entityManager.persist(objetoPersistir);
+	return objetoPersistir;
+    }
 
-	@Transactional
-	@Override
-	public M merge(M objetoUpdatear) {
-		entityManager.merge(objetoUpdatear);
-		return objetoUpdatear;
-	}
+    @Override
+//	@Transactional
+    public M findById(Long id) {
+	return entityManager.find(getClassDeM(), id);
+    }
+
+    @Override
+    @Transactional
+    public M merge(M objetoUpdatear) {
+	entityManager.merge(objetoUpdatear);
+	return objetoUpdatear;
+    }
+
+    @Override
+    @Transactional
+    public void remove(M objetoEliminar) {
+	entityManager.remove(objetoEliminar);
+    }
 
 }

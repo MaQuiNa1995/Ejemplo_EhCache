@@ -9,30 +9,31 @@ import es.maquina.ehcache.repository.EspadaRepository;
 @Service("espadaService")
 public class EspadaServiceImpl implements EspadaService {
 
-	private EspadaRepository espadaRepository;
+    private EspadaRepository espadaRepository;
 
-	@Override
-	public Espada actualizarEspada(Espada modificada) {
-		return espadaRepository.merge(modificada);
-	}
+    @Override
+    public Espada actualizarEspada(Espada modificada) {
+	return espadaRepository.merge(modificada);
+    }
 
-	public Espada aniadirEspada(Espada nueva) {
-		return espadaRepository.persist(nueva);
-	}
+    @Override
+    public Espada aniadirEspada(Espada nueva) {
+	return espadaRepository.persist(nueva);
+    }
 
-	@Override
-	public void borrarEspada(Long id) {
-		Espada aBorrar = obtenerEspada(id);
-		espadaRepository.remove(aBorrar);
-	}
+    @Override
+    public void borrarEspada(Long id) {
+	Espada aBorrar = obtenerEspada(id);
+	espadaRepository.remove(aBorrar);
+    }
 
-	@Override
-	public Espada obtenerEspada(Long id) {
-		return espadaRepository.find(id);
-	}
+    @Override
+    public Espada obtenerEspada(Long id) {
+	return espadaRepository.findById(id);
+    }
 
-	@Autowired
-	public void setTrabajadorRepository(EspadaRepository trabajadorRepository) {
-		this.espadaRepository = trabajadorRepository;
-	}
+    @Autowired
+    public void setEspadaRepository(EspadaRepository espadaRepository) {
+	this.espadaRepository = espadaRepository;
+    }
 }

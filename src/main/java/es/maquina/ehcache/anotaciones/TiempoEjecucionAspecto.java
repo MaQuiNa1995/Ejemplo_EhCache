@@ -12,28 +12,28 @@ import org.springframework.stereotype.Component;
 @Component
 public class TiempoEjecucionAspecto {
 
-	/** Logger genérico de la clase. */
-	private static final Logger LOGGER = LoggerFactory.getLogger(TiempoEjecucionAspecto.class);
+    /** Logger genérico de la clase. */
+    private static final Logger LOGGER = LoggerFactory.getLogger(TiempoEjecucionAspecto.class);
 
-	private long inicioEjecucion;
+    private long inicioEjecucion;
 
-	@Before("execution(* es.maquina.ehcache.repository.EspadaRepository.find(..))")
-	public void logBefore(JoinPoint joinPoint) {
+    @Before("execution(* es.maquina.ehcache.service.EspadaServiceImpl.obtenerEspada(..))")
+    public void logBefore(JoinPoint joinPoint) {
 
-		inicioEjecucion = getHoraActual();
+	inicioEjecucion = getHoraActual();
 
-	}
+    }
 
-	@After("execution(* es.maquina.ehcache.repository.EspadaRepository.find(..))")
-	public void logAfter(JoinPoint joinPoint) {
+    @After("execution(* es.maquina.ehcache.service.EspadaServiceImpl.obtenerEspada(..))")
+    public void logAfter(JoinPoint joinPoint) {
 
-		double tiempoEjecucion = (getHoraActual() - inicioEjecucion) / 1000D;
-		LOGGER.info("Metodo Ejecutado en: " + tiempoEjecucion + " segundos !!");
+	double tiempoEjecucion = (getHoraActual() - inicioEjecucion) / 1000D;
+	LOGGER.info("Metodo Ejecutado en: " + tiempoEjecucion + " segundos !!");
 
-	}
+    }
 
-	private long getHoraActual() {
-		return System.currentTimeMillis() % 1000;
-	}
+    private long getHoraActual() {
+	return System.currentTimeMillis() % 1000;
+    }
 
 }

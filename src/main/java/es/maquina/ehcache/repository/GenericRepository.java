@@ -7,27 +7,42 @@ package es.maquina.ehcache.repository;
  */
 public interface GenericRepository<M> {
 
-	/**
-	 * Hace el persist de la entidad pasada como parametro
-	 * 
-	 * @param objetoPersistir el objeto a persistir
-	 * @return la entidad persistida en base de datos
-	 */
-	M persist(M objetoPersistir);
+    /**
+     * Hace el persist de la entidad pasada como parametro
+     * 
+     * @param objetoPersistir el objeto a persistir
+     * @return la entidad persistida en base de datos
+     */
+    M persist(M objetoPersistir);
 
-	/**
-	 * Hace el merge de la entidad pasada como parametro
-	 * 
-	 * @param objetoUpdatear el objeto a modificar
-	 * @return the M
-	 */
-	M merge(M objetoUpdatear);
+    /**
+     * Busca la entidad por id en la Base de datos
+     * 
+     * @param id El id de la entidad a buscar
+     * @return La entidad encontrada
+     */
+    M findById(Long id);
 
-	/**
-	 * Se obtiene la clase del Repository que se ha usado en el generico
-	 * 
-	 * @return clase que usa el repository para la persistencia
-	 */
-	public abstract Class<M> getClassDeM();
+    /**
+     * Hace el merge de la entidad pasada como parametro
+     * 
+     * @param objetoUpdatear el objeto a modificar
+     * @return the M
+     */
+    M merge(M objetoUpdatear);
+
+    /**
+     * Se obtiene la clase del Repository que se ha usado en el generico
+     * 
+     * @return clase que usa el repository para la persistencia
+     */
+    abstract Class<M> getClassDeM();
+
+    /**
+     * Este método elimina el objeto
+     * 
+     * @param objetoEliminar
+     */
+    void remove(M objetoEliminar);
 
 }
