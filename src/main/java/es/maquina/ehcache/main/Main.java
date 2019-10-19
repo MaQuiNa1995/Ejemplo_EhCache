@@ -1,6 +1,5 @@
 package es.maquina.ehcache.main;
 
-import org.apache.log4j.PropertyConfigurator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -18,9 +17,6 @@ public class Main {
 
     public static void main(String[] args) {
 
-	// Configuración de la ruta del properties
-	PropertyConfigurator.configure("log4j.properties");
-
 	try (AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(ConfiguracionSpring.class,
 		LiquibaseConfig.class, EhCacheConfig.class)) {
 
@@ -29,7 +25,7 @@ public class Main {
 	    Espada espada = new Espada()
 		    .setCrafteable(Boolean.TRUE)
 		    .setDanno(325)
-		    .setNombre("Espada Champiñon")
+		    .setNombre("Espada Champiñón")
 		    .setPropiedad("+4% Crítico")
 		    .setRetroceso(50)
 		    .setVelocidad(4);

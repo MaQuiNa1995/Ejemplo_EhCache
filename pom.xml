@@ -19,12 +19,18 @@
 		<liquibase.version>3.6.2</liquibase.version>
 		<hsqldb.version>1.8.0.10</hsqldb.version>
 		<hibernate-jpa.version>1.0.2.Final</hibernate-jpa.version>
+		<log4j.version>2.6.1</log4j.version>
 	</properties>
 	<dependencies>
 		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>1.2.16</version>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-api</artifactId>
+			<version>${log4j.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-core</artifactId>
+			<version>${log4j.version}</version>
 		</dependency>
 
 		<dependency>

@@ -21,7 +21,6 @@ public class TiempoEjecucionAspecto {
     public void logBefore(JoinPoint joinPoint) {
 
 	inicioEjecucion = getHoraActual();
-
     }
 
     @After("execution(* es.maquina.ehcache.service.EspadaServiceImpl.obtenerEspada(..))")
@@ -29,7 +28,6 @@ public class TiempoEjecucionAspecto {
 
 	double tiempoEjecucion = (getHoraActual() - inicioEjecucion) / 1000D;
 	LOGGER.info("Metodo Ejecutado en: " + tiempoEjecucion + " segundos !!");
-
     }
 
     private long getHoraActual() {
