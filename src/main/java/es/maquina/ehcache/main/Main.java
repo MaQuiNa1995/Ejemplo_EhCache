@@ -20,7 +20,7 @@ public class Main {
 	try (AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(ConfiguracionSpring.class,
 		LiquibaseConfig.class, EhCacheConfig.class)) {
 
-	    EspadaService espadaService = (EspadaService) ctx.getBean("espadaService");
+	    EspadaService espadaService =  ctx.getBean("espadaService", EspadaService.class);
 
 	    Espada espada = new Espada()
 		    .setCrafteable(Boolean.TRUE)
@@ -30,13 +30,19 @@ public class Main {
 		    .setRetroceso(50)
 		    .setVelocidad(4);
 
+	    
+	    LOGGER.info("-------------------------------------------------------");
 	    espadaService.aniadirEspada(espada);
 	    LOGGER.info("Espada Añadida: " + espada.toString());
-
-	    LOGGER.info("Se trazan líneas para identificar mas rápidamente la traza de log que queremos verificar");
-	    LOGGER.info("-------------------------------------------------------");
+	   
 	    espadaService.obtenerEspada(espada.getId());
-	    LOGGER.info("-------------------------------------------------------");
+	    LOGGER.info("No tarda casi nada porque está cacheado en memoria");
+	    espadaService.borrarEspada(0L);
+
+	    espada.setId(null);
+	    
+	    LOGGER.info("Se llama de nuevo a la base de datos ya que se ha eliminado de la cache y de la base de datos el objeto");
+	    espadaService.aniadirEspada(espada);
 	    espadaService.obtenerEspada(espada.getId());
 	    LOGGER.info("-------------------------------------------------------");
 

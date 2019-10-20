@@ -41,8 +41,8 @@ public interface GenericRepository<M> {
     /**
      * Este método elimina el objeto
      * 
-     * @param objetoEliminar
+     * @param idEliminar id del objeto a eliminar
      */
-    void remove(M objetoEliminar);
+    void remove(Long idEliminar);
 
 }

@@ -26,7 +26,7 @@ public abstract class GenericRepositoryImpl<M> implements GenericRepository<M> {
     }
 
     @Override
-//	@Transactional
+    @Transactional
     public M findById(Long id) {
 	return entityManager.find(getClassDeM(), id);
     }
@@ -40,8 +40,10 @@ public abstract class GenericRepositoryImpl<M> implements GenericRepository<M> {
 
     @Override
     @Transactional
-    public void remove(M objetoEliminar) {
+    public void remove(Long id) {
+	M objetoEliminar = entityManager.find(getClassDeM(), id);
 	entityManager.remove(objetoEliminar);
+
     }
 
 }

@@ -22,9 +22,8 @@ public class EspadaServiceImpl implements EspadaService {
     }
 
     @Override
-    public void borrarEspada(Long id) {
-	Espada aBorrar = obtenerEspada(id);
-	espadaRepository.remove(aBorrar);
+    public void borrarEspada(Long idObjetoBorrar) {
+	espadaRepository.remove(idObjetoBorrar);
     }
 
     @Override

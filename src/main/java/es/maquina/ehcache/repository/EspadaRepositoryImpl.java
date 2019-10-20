@@ -1,7 +1,10 @@
 package es.maquina.ehcache.repository;
 
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import es.maquina.ehcache.dominio.Espada;
 
@@ -25,10 +28,42 @@ public class EspadaRepositoryImpl extends GenericRepositoryImpl<Espada> implemen
      * ejecutarán
      * 
      */
-    @Cacheable("espadaCache")
     @Override
+    @Cacheable(value = "espadaCache", key = "#id")
     public Espada findById(Long id) {
 	return super.findById(id);
+    }
+
+    /**
+     * Llamada al
+     * {@link es.maquina.ehcache.repository.GenericRepository#persist(Espada espada)}
+     * que overridea para añadir el
+     * {@link org.springframework.cache.annotation.Cacheable}
+     * <p>
+     * 
+     * @param espada {@link Espada} objeto a ser persistido
+     * 
+     * @return espada {@link Espada} objeto persistido
+     */
+    @Override
+    @CachePut(value = "espadaCache", key = "#espada.id")
+    public Espada persist(Espada espada) {
+	return super.persist(espada);
+    }
+
+    /**
+     * Llamada al
+     * {@link es.maquina.ehcache.repository.GenericRepository#remove(Espada espada)}
+     * que overridea para añadir el
+     * {@link org.springframework.cache.annotation.CacheEvict}
+     * 
+     * @param espada {@link Espada} objeto a ser eliminado
+     */
+    @Override
+    @Transactional
+    @CacheEvict(value = "espadaCache", key = "#idEspada")
+    public void remove(Long idEspada) {
+	super.remove(idEspada);
     }
 
     @Override
