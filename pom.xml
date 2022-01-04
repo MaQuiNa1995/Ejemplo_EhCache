@@ -19,7 +19,7 @@
 		<liquibase.version>3.6.2</liquibase.version>
 		<hsqldb.version>1.8.0.10</hsqldb.version>
 		<hibernate-jpa.version>1.0.2.Final</hibernate-jpa.version>
-		<log4j.version>2.13.3</log4j.version>
+		<log4j.version>2.17.1</log4j.version>
 	</properties>
 	<dependencies>
 		<dependency>
