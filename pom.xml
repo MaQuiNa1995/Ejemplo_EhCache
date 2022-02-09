@@ -13,7 +13,7 @@
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<spring.version>5.1.5.RELEASE</spring.version>
-		<hibernate.version>5.3.6.Final</hibernate.version>
+		<hibernate.version>5.4.24.Final</hibernate.version>
 		<junit.version>4.12</junit.version>
 		<commonsdbcp.version>1.4</commonsdbcp.version>
 		<liquibase.version>3.6.2</liquibase.version>
