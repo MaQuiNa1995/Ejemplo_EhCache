@@ -16,7 +16,7 @@
 		<hibernate.version>5.3.6.Final</hibernate.version>
 		<junit.version>4.12</junit.version>
 		<commonsdbcp.version>1.4</commonsdbcp.version>
-		<liquibase.version>3.6.2</liquibase.version>
+		<liquibase.version>4.8.0</liquibase.version>
 		<hsqldb.version>1.8.0.10</hsqldb.version>
 		<hibernate-jpa.version>1.0.2.Final</hibernate-jpa.version>
 		<log4j.version>2.17.1</log4j.version>
